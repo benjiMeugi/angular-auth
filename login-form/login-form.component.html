@@ -1,0 +1,51 @@
+
+<div class="clr-row">
+    <div class="clr-col-sm-12 clr-col-md-8 clr-offset-md-2 clr-col-lg-4 clr-offset-lg-4">
+
+        <h1 class="text-center">CONNEXION</h1>
+        <form class="clr-form login-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="clr-form-control clr-row">
+                <label for="username" class="clr-control-label clr-col-12">Identifiant</label>
+                <div class="clr-control-container clr-col-12"
+                    [ngClass]="{'clr-error': formGroup.get('username')?.invalid && (formGroup.get('username')?.touched || formGroup.get('username')?.dirty)}">
+                    <div class="clr-input-wrapper">
+                        <input type="text" id="username" class="clr-input" formControlName="username" />
+                        <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
+                    </div>
+                    <span class="clr-subtext"
+                        *ngIf="formGroup.get('username')?.errors?.['required'] && (formGroup.get('username')?.touched || formGroup.get('username')?.dirty)">
+                        L'identifiant est requis.
+                    </span>
+                </div>
+            </div>
+        
+            <div class="clr-form-control clr-row">
+                <label for="password" class="clr-control-label clr-col-12">Mot de passe</label>
+                <div class="clr-control-container clr-col-12"
+                    [ngClass]="{'clr-error': formGroup.get('password')?.invalid && (formGroup.get('password')?.touched || formGroup.get('password')?.dirty)}">
+                    <div class="clr-input-wrapper">
+                        <input [type]="passwordFormType" id="password" class="clr-input custom-password"
+                            formControlName="password" />
+                        <button type="button" class="clr-input-group-icon-action button-password" (click)="onTogglePasswordType()">
+                            <cds-icon class="clr-password-eye-icon" shape="eye" *ngIf="passwordFormType === 'text'"></cds-icon>
+                            <cds-icon class="clr-password-eye-icon" shape="eye-hide" *ngIf="passwordFormType !== 'text'"></cds-icon>
+                        </button>
+        
+                        <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
+                    </div>
+                    <span class="clr-subtext"
+                        *ngIf="formGroup.get('password')?.errors?.['required'] && (formGroup.get('password')?.touched || formGroup.get('password')?.dirty)">
+                        Le mot de passe est requis.
+                    </span>
+                </div>
+            </div>
+        
+            <div class="button-container">
+                <button class="btn btn-primary button" type="submit" [disabled]="formGroup.invalid || performingAction">
+                    CONNEXION
+                </button>
+            </div>
+        </form>
+        
+    </div>
+</div>
